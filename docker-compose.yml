@@ -1,0 +1,20 @@
+version: "3"
+services:
+  news-portal-db:
+    image: postgres:latest
+    container_name: news-portal-db-container
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_DBNAME: "news_db"
+    volumes:
+      - /var/lib/postgresql/data
+  news-portal-app:
+    build: .
+    container_name: news-portal-app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - news-portal-db
