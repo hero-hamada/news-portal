@@ -1,18 +1,23 @@
-CREATE table role (
-    id BIGSERIAL PRIMARY KEY NOT NULL,
+CREATE table users (
+    id bigserial  PRIMARY KEY ,
+    name varchar(100) NOT NULL,
+    password varchar(80)
+);
+
+CREATE table roles (
+    id serial PRIMARY KEY NOT NULL,
     name varchar(100) NOT NULL
 );
 
-create table user_role (
-    user_id bigint REFERENCES "user" ("id") ON UPDATE RESTRICT ON DELETE RESTRICT,
-    role_id bigint REFERENCES "role" ("id") ON UPDATE RESTRICT ON DELETE RESTRICT,
---     UNIQUE (user_id, role_id)
+create table users_roles (
+    user_id bigint REFERENCES users ("id") ON UPDATE RESTRICT ON DELETE RESTRICT,
+    role_id int REFERENCES roles ("id") ON UPDATE RESTRICT ON DELETE RESTRICT,
     CONSTRAINT user_roles_pk PRIMARY KEY (user_id, role_id)
 );
 
-insert into "user" VALUES  (1, 'user', 'MTIzNDU2', 'm@m.com');
+insert into users VALUES  (2, 'user', '$2a$12$Zqs39GdGQnSdFSIAsmIWteEDROyg8IfCNS8USQbJPTKScZOLjEbaG');
 
-insert into role VALUES (1, 'ROLE_USER');
-insert into role VALUES (2, 'ROLE_ADMIN');
+insert into roles VALUES (1, 'ROLE_USER');
+insert into roles VALUES (2, 'ROLE_ADMIN');
 
-insert into user_role VALUES (1, 2);
+insert into users_roles VALUES (1, 2);

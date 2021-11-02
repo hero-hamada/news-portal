@@ -2,9 +2,11 @@ package com.epam.newsPortal.controller;
 
 import com.epam.newsPortal.dao.NewsDAO;
 import com.epam.newsPortal.model.News;
+import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/news")
@@ -20,14 +23,13 @@ public class NewsController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NewsController.class.getName());
 
-    private NewsDAO newsDAO;
-
     @Autowired
-    public NewsController(NewsDAO newsDAO) {
-        this.newsDAO = newsDAO;
-    }
+    private NewsDAO newsDAO;
+    @Autowired
+    private SessionFactory sessionFactory;
 
     @GetMapping()
+    @PreAuthorize("authenticated")
     public String index(Model model) {
         model.addAttribute("newsList", newsDAO.list());
         return "news/index";
@@ -45,21 +47,21 @@ public class NewsController {
 //        return "people/show";
 //    }
 
-//    @GetMapping("/new")
-//    public String newPerson(@ModelAttribute("person") Person person) {
-//        return "people/new";
-//    }
-//
-//    @PostMapping()
-//    public String create(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult) {
-//        if (bindingResult.hasErrors()) {
-//            return "people/new";
-//        }
-//        personDAO.save(person);
-//        return "redirect:/people";
-//    }
-//
-    @ResponseBody
+    @GetMapping("/add")
+    public String addNews(@ModelAttribute("news") News news) {
+        return "news/add";
+    }
+
+    @PostMapping()
+    public String create(@ModelAttribute("person") @Valid News news, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "news/add";
+        }
+        newsDAO.save(news);
+        return "redirect:/news";
+    }
+
+
     @GetMapping("/{id}/edit")
     public String edit(Model model, @PathVariable("id") Long id) {
         model.addAttribute("news", newsDAO.get(id));
@@ -67,19 +69,21 @@ public class NewsController {
     }
 
     @PatchMapping("/{id}")
-    public String update(@ModelAttribute("news") @Valid News news, BindingResult bindingResult,
-                         @PathVariable("id") Long id, HttpServletRequest request) {
+    public String update(@ModelAttribute("news") @Valid News news, BindingResult bindingResult, HttpServletRequest request) {
         if (bindingResult.hasErrors()) {
             return "news/edit";
         }
+        newsDAO.update(news);
 
-        newsDAO.saveOrUpdate(id, news);
-        return "redirect:" + request.getHeader("referer");
+        return "redirect:" + request.getHeader("referer").replace("/edit","");
     }
 
     @DeleteMapping("/delete")
-    public String delete(@ModelAttribute("newsIds") @Valid List<Long> newsIds) {
-        newsDAO.delete(newsIds);
+    public String delete(@RequestParam("id") List<String> newsIds) {
+        List<Long> newsIdsToDelete = newsIds.stream().map(Long::parseLong).collect(Collectors.toList());
+        newsIdsToDelete.forEach((id) -> newsDAO.delete(id));
+//        sessionFactory.getCurrentSession().flush();
         return "redirect:/news";
     }
+
 }

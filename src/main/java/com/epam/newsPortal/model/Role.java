@@ -1,14 +1,18 @@
 package com.epam.newsPortal.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Set;
 
+@NamedNativeQuery(
+        name = "get_role_by_id",
+        query = "SELECT * FROM news_db.public.roles WHERE id = :id"
+)
+
 @Entity
-@Getter @Setter
-@Table(name = "role")
+@Data
+@Table(name = "roles")
 public class Role {
 
     public Role () {
@@ -21,7 +25,7 @@ public class Role {
     @Column(name = "name")
     private String name;
 
-    @ManyToMany(mappedBy = "role")
+    @ManyToMany(mappedBy = "roles")
     private Set<User> users;
 
     @Override

@@ -8,12 +8,21 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
 
+
+@NamedQueries
+        ({
+                @NamedQuery(
+                        name = "all_news_order_by_date",
+                        query = "from News order by date"
+                )
+        })
+
 @Entity
 @Table(name = "news")
 @AllArgsConstructor
 @NoArgsConstructor
 @RequiredArgsConstructor
-@Getter @Setter
+@Data
 @DynamicUpdate
 public class News {
 

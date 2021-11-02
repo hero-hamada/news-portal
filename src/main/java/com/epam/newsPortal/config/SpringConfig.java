@@ -49,8 +49,6 @@ public class SpringConfig implements WebMvcConfigurer {
 //    public BCryptPasswordEncoder bCryptPasswordEncoder() {
 //        return new BCryptPasswordEncoder();
 //    }
-//
-//
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {

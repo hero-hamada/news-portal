@@ -1,5 +1,5 @@
-package com.epam.newsPortal.service;
-
-public interface NewsService {
-
-}
+//package com.epam.newsPortal.service;
+//
+//public interface NewsService {
+//
+//}
