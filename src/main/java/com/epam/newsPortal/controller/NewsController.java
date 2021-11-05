@@ -41,12 +41,6 @@ public class NewsController {
         return "news/view";
     }
 
-//    @GetMapping("/{id}")
-//    public String show(@PathVariable("id") int id, Model model) {
-//        model.addAttribute("person", personDAO.show(id));
-//        return "people/show";
-//    }
-
     @GetMapping("/add")
     public String addNews(@ModelAttribute("news") News news) {
         return "news/add";
@@ -82,8 +76,12 @@ public class NewsController {
     public String delete(@RequestParam("id") List<String> newsIds) {
         List<Long> newsIdsToDelete = newsIds.stream().map(Long::parseLong).collect(Collectors.toList());
         newsIdsToDelete.forEach((id) -> newsDAO.delete(id));
-//        sessionFactory.getCurrentSession().flush();
         return "redirect:/news";
     }
 
+    @DeleteMapping("/{id}/delete")
+    public String edit(@PathVariable("id") Long id) {
+        newsDAO.delete(id);
+        return "redirect:/news";
+    }
 }
