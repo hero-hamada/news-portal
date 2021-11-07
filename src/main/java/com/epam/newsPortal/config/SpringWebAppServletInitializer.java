@@ -26,11 +26,6 @@ public class SpringWebAppServletInitializer extends AbstractAnnotationConfigDisp
     @Override
     public void onStartup(ServletContext aServletContext) throws ServletException {
         super.onStartup(aServletContext);
-//        XmlWebApplicationContext context = new XmlWebApplicationContext();
-//        context.setConfigLocation("/WEB-INF/spring/appconfig-root.xml");
-//        ServletRegistration.Dynamic dispatcher = aServletContext.addServlet("dispatcher", new DispatcherServlet(context));
-//        dispatcher.setLoadOnStartup(1);
-//        dispatcher.addMapping("/");
         registerHiddenFieldFilter(aServletContext);
     }
 

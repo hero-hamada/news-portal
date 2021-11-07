@@ -16,7 +16,6 @@ public class NewsDAOImpl implements NewsDAO {
 
     private SessionFactory sessionFactory;
 
-
     public NewsDAOImpl () {
     }
 
@@ -28,7 +27,7 @@ public class NewsDAOImpl implements NewsDAO {
 //    HQL, JPQL
     @Override
     @Transactional
-    public List<News> list() {
+    public List<News> getAll() {
         Session session = sessionFactory.openSession();
         List<News> newsList = session.createNamedQuery("all_news_order_by_date", News.class).getResultList();
         session.close();
@@ -37,7 +36,7 @@ public class NewsDAOImpl implements NewsDAO {
 
     @Override
     @Transactional
-    public News get(Long id) {
+    public News getById(Long id) {
         Session session = sessionFactory.openSession();
         News news = session.get(News.class, id);
         session.close();
@@ -66,7 +65,7 @@ public class NewsDAOImpl implements NewsDAO {
     @Transactional
     public void delete(Long id) {
         Session session = this.sessionFactory.getCurrentSession();
-        session.delete(get(id));
+        session.delete(this.getById(id));
         session.close();
     }
 

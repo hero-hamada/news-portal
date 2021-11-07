@@ -6,9 +6,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 public interface NewsDAO {
-    List<News> list();
+    List<News> getAll();
 
-    News get(Long id);
+    News getById(Long id);
 
     @Transactional
     void save(News news);

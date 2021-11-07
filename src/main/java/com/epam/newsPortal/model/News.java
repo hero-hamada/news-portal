@@ -19,8 +19,6 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "news")
-@AllArgsConstructor
-@NoArgsConstructor
 @RequiredArgsConstructor
 @Data
 @DynamicUpdate
@@ -29,14 +27,14 @@ public class News {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NonNull
+    @Column(name = "title")
     private String title;
-    @NonNull
+    @Column(name = "date")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
-    @NonNull
+    @Column(name = "brief")
     private String brief;
-    @NonNull
+    @Column(name = "content")
     private String content;
 
     @Override
