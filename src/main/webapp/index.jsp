@@ -1,5 +1,5 @@
 <html>
 <body>
-<a href="/news-portal/news">news</a>
+<a href="/news">news</a>
 </body>
 </html>

@@ -5,4 +5,4 @@ ENTRYPOINT ["catalina.sh", "run"]
 
 FROM postgres
 
-ADD ./resources/database/news_db_dump.sql /docker-entrypoint-initdb.d
+ADD main/resources/database/news_db_dump.sql /docker-entrypoint-initdb.d

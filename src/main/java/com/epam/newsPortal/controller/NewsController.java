@@ -55,7 +55,7 @@ public class NewsController {
         return "redirect:/news";
     }
 
-     @GetMapping("/{id}/edit")
+    @GetMapping("/{id}/edit")
     public String edit(Model model, @PathVariable("id") Long id) {
         model.addAttribute("news", newsService.getById(id));
         return "news/edit";
