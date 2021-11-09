@@ -46,8 +46,6 @@ public class NewsDAOImpl implements NewsDAO {
     @Override
     @Transactional
     public void save(News news) {
-//        ????????saveOrUpdate
-        System.out.println(news);
         Session session = sessionFactory.openSession();
         session.save(news);
         session.close();
@@ -56,7 +54,7 @@ public class NewsDAOImpl implements NewsDAO {
     @Override
     @Transactional
     public void update(News news) {
-        Session session = this.sessionFactory.getCurrentSession();
+        Session session = this.sessionFactory.openSession();
         session.update(news);
         session.close();
     }
@@ -64,7 +62,7 @@ public class NewsDAOImpl implements NewsDAO {
     @Override
     @Transactional
     public void delete(Long id) {
-        Session session = this.sessionFactory.getCurrentSession();
+        Session session = this.sessionFactory.openSession();
         session.delete(this.getById(id));
         session.close();
     }

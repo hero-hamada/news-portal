@@ -26,7 +26,6 @@ import java.util.Objects;
 public class News {
 
     @Id
-    @NonNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NonNull
