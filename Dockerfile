@@ -4,5 +4,6 @@ ADD target/news-portal.war /usr/local/tomcat/webapps/news-portal.war
 ENTRYPOINT ["catalina.sh", "run"]
 
 FROM postgres
-
-ADD main/resources/database/news_db_dump.sql /docker-entrypoint-initdb.d
+ENV POSTGRES_PASSWORD postgres
+ENV POSTGRES_DB news_db
+ADD src/main/resources/database/news_db_dump.sql /docker-entrypoint-initdb.d

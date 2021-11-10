@@ -21,7 +21,7 @@ DROP DATABASE IF EXISTS news_db;
 -- Name: news_db; Type: DATABASE; Schema: -; Owner: postgres
 --
 
-CREATE DATABASE news_db WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE = 'Russian_Russia.1251';
+CREATE DATABASE news_db WITH TEMPLATE = template0 ENCODING = 'UTF8';
 
 
 ALTER DATABASE news_db OWNER TO postgres;
