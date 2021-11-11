@@ -10,6 +10,13 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Implementation of {@link com.epam.newsPortal.service.NewsService}
+ *
+ * @author Zhanakhmetova Merey
+ * @version 1.0
+ */
+
 @Service
 @RequiredArgsConstructor
 public class NewsServiceImpl implements NewsService {

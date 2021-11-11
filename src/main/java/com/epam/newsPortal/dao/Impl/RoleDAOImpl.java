@@ -7,6 +7,13 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+/**
+ * Implementation of {@link com.epam.newsPortal.dao.RoleDAO}
+ *
+ * @author Zhanakhmetova Merey
+ * @version 1.0
+ */
+
 @Repository
 public class RoleDAOImpl implements RoleDAO {
 
@@ -20,7 +27,6 @@ public class RoleDAOImpl implements RoleDAO {
         this.sessionFactory = sessionFactory;
     }
 
-//    NamedNativeQuery
     @Override
     public Role get(Long id) {
         Session session = sessionFactory.openSession();

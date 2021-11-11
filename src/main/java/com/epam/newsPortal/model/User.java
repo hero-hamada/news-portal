@@ -1,9 +1,17 @@
 package com.epam.newsPortal.model;
 
 import lombok.Data;
+import lombok.NonNull;
 
 import javax.persistence.*;
 import java.util.Set;
+
+/**
+ * Simple JavaBean object that represents a User.
+ *
+ * @author Merey
+ * @version 1.0
+ */
 
 @Entity
 @Data
@@ -13,10 +21,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "username")
+    @NonNull
     private String username;
 
-    @Column(name = "password")
+    @NonNull
     private String password;
 
     @Transient

@@ -8,6 +8,12 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
 
+/**
+ * Simple JavaBean object that represents News.
+ *
+ * @author Merey
+ * @version 1.0
+ */
 
 @NamedQueries
         ({
@@ -18,7 +24,6 @@ import java.util.Objects;
         })
 
 @Entity
-@Table(name = "news")
 @RequiredArgsConstructor
 @NoArgsConstructor
 @Data
@@ -29,17 +34,13 @@ public class News {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NonNull
-    @Column(name = "title")
     private String title;
     @NonNull
-    @Column(name = "date")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
     @NonNull
-    @Column(name = "brief")
     private String brief;
     @NonNull
-    @Column(name = "content")
     private String content;
 
     @Override

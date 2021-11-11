@@ -17,6 +17,13 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Controller for {@link com.epam.newsPortal.model.News}'s pages.
+ *
+ * @author Merey Zhanakhmetova
+ * @version 1.0
+ */
+
 @Controller
 @RequestMapping("/news")
 public class NewsController {

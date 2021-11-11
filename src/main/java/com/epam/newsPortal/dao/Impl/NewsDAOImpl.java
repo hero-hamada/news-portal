@@ -10,6 +10,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * Implementation of {@link com.epam.newsPortal.dao.NewsDAO}
+ *
+ * @author Zhanakhmetova Merey
+ * @version 1.0
+ */
 
 @Repository
 public class NewsDAOImpl implements NewsDAO {
@@ -24,7 +30,6 @@ public class NewsDAOImpl implements NewsDAO {
         this.sessionFactory = sessionFactory;
     }
 
-//    HQL, JPQL
     @Override
     @Transactional
     public List<News> getAll() {

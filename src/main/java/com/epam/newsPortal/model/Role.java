@@ -1,9 +1,18 @@
 package com.epam.newsPortal.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 import javax.persistence.*;
 import java.util.Set;
+
+/**
+ * Simple JavaBean object that represents role of {@link User}.
+ *
+ * @author Merey
+ * @version 1.0
+ */
 
 @NamedNativeQuery(
         name = "get_role_by_id",
@@ -12,17 +21,15 @@ import java.util.Set;
 
 @Entity
 @Data
+@NoArgsConstructor
 @Table(name = "roles")
 public class Role {
-
-    public Role () {
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
+    @NonNull
     private String name;
 
     @ManyToMany(mappedBy = "roles")

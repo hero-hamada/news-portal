@@ -5,6 +5,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
+/**
+ * Data Transfer Object for {@link com.epam.newsPortal.model.News}
+ *
+ * @author Merey Zhanakhmetova
+ * @version 1.0
+ */
 
 @Getter
 @Setter

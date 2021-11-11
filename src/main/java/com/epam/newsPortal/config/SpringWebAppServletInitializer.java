@@ -6,6 +6,12 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 
+/**
+ * Java-based Spring configuration for configuring a DispatcherServlet
+ *
+ * @author Merey Zhanakhmetova
+ * @version 1.0
+ */
 
 public class SpringWebAppServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override

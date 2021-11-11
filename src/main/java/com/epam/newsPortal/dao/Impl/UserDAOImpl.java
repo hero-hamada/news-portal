@@ -12,6 +12,12 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
+/**
+ * Implementation of {@link com.epam.newsPortal.dao.UserDAO}
+ *
+ * @author Zhanakhmetova Merey
+ * @version 1.0
+ */
 
 @Repository
 public class UserDAOImpl implements UserDAO {
@@ -26,7 +32,6 @@ public class UserDAOImpl implements UserDAO {
         this.sessionFactory = sessionFactory;
     }
 
-//    Criteria API
     @Override
     @Transactional
     public User findByUsername(String name) {
