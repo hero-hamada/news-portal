@@ -19,6 +19,13 @@ import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 
 import java.util.Locale;
 
+/**
+ * Core Java-based Spring configuration class.
+ *
+ * @author Merey Zhanakhmetova
+ * @version 1.0
+ */
+
 @Configuration
 @ComponentScan("com.epam.newsPortal")
 @EnableWebMvc
@@ -31,6 +38,7 @@ public class SpringConfig implements WebMvcConfigurer {
     public SpringConfig(ApplicationContext applicationContext) {
         this.applicationContext = applicationContext;
     }
+
     @Bean
     public LocaleResolver localeResolver() {
         SessionLocaleResolver sessionLocaleResolver = new SessionLocaleResolver();
@@ -44,13 +52,6 @@ public class SpringConfig implements WebMvcConfigurer {
         localeChangeInterceptor.setParamName("lang");
         return localeChangeInterceptor;
     }
-
-//    @Bean
-//    public BCryptPasswordEncoder bCryptPasswordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
-//
-//
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {

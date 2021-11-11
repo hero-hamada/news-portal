@@ -4,11 +4,20 @@ import com.epam.newsPortal.dao.UserDAO;
 import com.epam.newsPortal.model.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
+/**
+ * Implementation of {@link com.epam.newsPortal.dao.UserDAO}
+ *
+ * @author Zhanakhmetova Merey
+ * @version 1.0
+ */
 
 @Repository
 public class UserDAOImpl implements UserDAO {
@@ -23,13 +32,23 @@ public class UserDAOImpl implements UserDAO {
         this.sessionFactory = sessionFactory;
     }
 
+    /**
+     * Find {@link com.epam.newsPortal.model.User} object by username using Criteria API
+     */
     @Override
     @Transactional
-    public User findByName(String name) {
+    public User findByUsername(String username) {
+
         Session session = sessionFactory.openSession();
-        Query query = session.createQuery("from User u where u.name=:name");
-        query.setParameter("name", name);
-        return (User) query.getResultList().stream().findFirst().orElse(null);
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+
+        CriteriaQuery<User> criteria = builder.createQuery( User.class );
+        Root<User> root = criteria.from( User.class );
+        criteria.select( root );
+        criteria.where( builder.equal( root.get("username"), username ) );
+
+        return session.createQuery( criteria ).getSingleResult();
+
     }
 
     @Override
@@ -38,7 +57,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public User get(Long id) {
+    public User getById(Long id) {
         return sessionFactory.openSession().get(User.class, id);
     }
 }

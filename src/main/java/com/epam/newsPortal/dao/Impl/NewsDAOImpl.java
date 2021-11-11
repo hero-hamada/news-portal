@@ -4,58 +4,75 @@ import com.epam.newsPortal.dao.NewsDAO;
 import com.epam.newsPortal.model.News;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * Implementation of {@link com.epam.newsPortal.dao.NewsDAO}
+ *
+ * @author Zhanakhmetova Merey
+ * @version 1.0
+ */
+
 @Repository
 public class NewsDAOImpl implements NewsDAO {
 
-    @Autowired
     private SessionFactory sessionFactory;
 
     public NewsDAOImpl () {
     }
 
+    @Autowired
     public NewsDAOImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
+    /**
+     * Get all records from news table as list of {@link com.epam.newsPortal.model.News} objects using HQL
+     */
     @Override
     @Transactional
-    public List<News> list() {
+    public List<News> getAll() {
         Session session = sessionFactory.openSession();
-        List<News> newsList = (List<News>) session.createQuery("from News order by date", News.class).getResultList();
+        List<News> newsList = session.createNamedQuery("all_news_order_by_date", News.class).getResultList();
+        session.close();
         return newsList;
     }
 
     @Override
     @Transactional
-    public News get(Long id) {
+    public News getById(Long id) {
         Session session = sessionFactory.openSession();
-        return session.get(News.class, id);
+        News news = session.get(News.class, id);
+        session.close();
+        return news;
     }
 
     @Override
     @Transactional
-    public void saveOrUpdate(Long id, News news) {
-        sessionFactory.openSession().save(news);
+    public void save(News news) {
+        Session session = sessionFactory.openSession();
+        session.save(news);
+        session.close();
     }
 
     @Override
+    @Transactional
+    public void update(News news) {
+        Session session = this.sessionFactory.openSession();
+        session.update(news);
+        session.close();
+    }
+
+    @Override
+    @Transactional
     public void delete(Long id) {
+        Session session = this.sessionFactory.openSession();
+        session.delete(this.getById(id));
+        session.close();
     }
 
-    @Override
-    @Transactional
-    public void delete(List<Long> newsIds) {
-        Session session = sessionFactory.openSession();
-        Query query = session.createQuery("DELETE news a WHERE id IN (:newsIds)", News.class);
-        query.setParameter("newsIds", newsIds);
-        query.executeUpdate();
-//        sessionFactory.getCurrentSession().;
-    }
 }

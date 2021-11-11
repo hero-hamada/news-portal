@@ -6,6 +6,12 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 
+/**
+ * Java-based Spring configuration for configuring a DispatcherServlet
+ *
+ * @author Merey Zhanakhmetova
+ * @version 1.0
+ */
 
 public class SpringWebAppServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
@@ -26,11 +32,6 @@ public class SpringWebAppServletInitializer extends AbstractAnnotationConfigDisp
     @Override
     public void onStartup(ServletContext aServletContext) throws ServletException {
         super.onStartup(aServletContext);
-//        XmlWebApplicationContext context = new XmlWebApplicationContext();
-//        context.setConfigLocation("/WEB-INF/spring/appconfig-root.xml");
-//        ServletRegistration.Dynamic dispatcher = aServletContext.addServlet("dispatcher", new DispatcherServlet(context));
-//        dispatcher.setLoadOnStartup(1);
-//        dispatcher.addMapping("/");
         registerHiddenFieldFilter(aServletContext);
     }
 

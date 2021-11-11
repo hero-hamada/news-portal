@@ -14,6 +14,13 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.sql.DataSource;
 import java.util.Properties;
 
+/**
+ * Java-based Hibernate configuration class.
+ *
+ * @author Merey Zhanakhmetova
+ * @version 1.0
+ */
+
 @Configuration
 @EnableTransactionManagement
 public class HibernateConfig {
@@ -37,7 +44,6 @@ public class HibernateConfig {
         return dataSource;
     }
 
-
     @Bean
     public HibernateTransactionManager transactionManager(){
         HibernateTransactionManager txManager = new HibernateTransactionManager();
@@ -47,9 +53,9 @@ public class HibernateConfig {
 
     private final Properties hibernateProperties() {
         Properties hibernateProperties = new Properties();
-//        hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
         hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQL9Dialect");
         hibernateProperties.setProperty("hibernate.show_sql", "true");
+        hibernateProperties.setProperty("hibernate.format_sql", "true");
         return hibernateProperties;
     }
 
@@ -58,5 +64,4 @@ public class HibernateConfig {
     public NewsDAO getNewsDao(SessionFactory sessionFactory) {
         return new NewsDAOImpl(sessionFactory);
     }
-
 }

@@ -8,12 +8,25 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
 
+/**
+ * Simple JavaBean object that represents News.
+ *
+ * @author Merey
+ * @version 1.0
+ */
+
+@NamedQueries
+        ({
+                @NamedQuery(
+                        name = "all_news_order_by_date",
+                        query = "from News order by date"
+                )
+        })
+
 @Entity
-@Table(name = "news")
-@AllArgsConstructor
-@NoArgsConstructor
 @RequiredArgsConstructor
-@Getter @Setter
+@NoArgsConstructor
+@Data
 @DynamicUpdate
 public class News {
 
