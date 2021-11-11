@@ -10,11 +10,24 @@ import com.epam.newsPortal.model.User;
  */
 
 public interface UserDAO {
+
     /**
-     * @param name username
-     * @return User object by username using Criteria API
+     * Gets one record by username from users table as {@link com.epam.newsPortal.model.User} object
+     * @param username {@link com.epam.newsPortal.model.User}.username
+     * @return User object by passed username
      */
-    User findByUsername(String name);
+    User findByUsername(String username);
+
+    /**
+     * Saves one record to the users table
+     * @param user {@link com.epam.newsPortal.model.User} object to save
+     */
     void save(User user);
-    User get(Long id);
+
+    /**
+     * Get one record by id from users table as {@link com.epam.newsPortal.model.User} object
+     * @param id primary key of {@link com.epam.newsPortal.model.User} object
+     * @return {@link com.epam.newsPortal.model.User} object with passed id
+     */
+    User getById(Long id);
 }

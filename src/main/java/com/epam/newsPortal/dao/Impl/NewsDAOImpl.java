@@ -30,6 +30,9 @@ public class NewsDAOImpl implements NewsDAO {
         this.sessionFactory = sessionFactory;
     }
 
+    /**
+     * Get all records from news table as list of {@link com.epam.newsPortal.model.News} objects using HQL
+     */
     @Override
     @Transactional
     public List<News> getAll() {

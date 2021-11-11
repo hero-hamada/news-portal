@@ -32,9 +32,12 @@ public class UserDAOImpl implements UserDAO {
         this.sessionFactory = sessionFactory;
     }
 
+    /**
+     * Find {@link com.epam.newsPortal.model.User} object by username using Criteria API
+     */
     @Override
     @Transactional
-    public User findByUsername(String name) {
+    public User findByUsername(String username) {
 
         Session session = sessionFactory.openSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
@@ -42,7 +45,7 @@ public class UserDAOImpl implements UserDAO {
         CriteriaQuery<User> criteria = builder.createQuery( User.class );
         Root<User> root = criteria.from( User.class );
         criteria.select( root );
-        criteria.where( builder.equal( root.get("name"), name ) );
+        criteria.where( builder.equal( root.get("username"), username ) );
 
         return session.createQuery( criteria ).getSingleResult();
 
@@ -54,7 +57,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public User get(Long id) {
+    public User getById(Long id) {
         return sessionFactory.openSession().get(User.class, id);
     }
 }

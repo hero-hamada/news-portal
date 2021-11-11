@@ -1,6 +1,7 @@
 package com.epam.newsPortal.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 import javax.persistence.*;
@@ -15,8 +16,10 @@ import java.util.Set;
 
 @Entity
 @Data
+@NoArgsConstructor
 @Table(name="users")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

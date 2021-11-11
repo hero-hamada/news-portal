@@ -10,9 +10,11 @@ import com.epam.newsPortal.model.Role;
  */
 
 public interface RoleDAO {
+
     /**
-     * @param id Role id
-     * @return Role object by id using NamedNativeQuery
+     * Get one record by id from roles table as {@link com.epam.newsPortal.model.Role} object
+     * @param id {@link com.epam.newsPortal.model.Role}.id
+     * @return {@link com.epam.newsPortal.model.Role} object with passed id
      */
-    Role get(Long id);
+    Role getById(Long id);
 }

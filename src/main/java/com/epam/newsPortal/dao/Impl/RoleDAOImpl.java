@@ -27,8 +27,11 @@ public class RoleDAOImpl implements RoleDAO {
         this.sessionFactory = sessionFactory;
     }
 
+    /**
+     * Get one record by id from roles table as {@link com.epam.newsPortal.model.Role} object using NamedNativeQuery
+     */
     @Override
-    public Role get(Long id) {
+    public Role getById(Long id) {
         Session session = sessionFactory.openSession();
         return session.createNamedQuery("get_role_by_id", Role.class)
                 .setParameter("id", id)
